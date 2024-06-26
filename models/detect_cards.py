@@ -4,13 +4,7 @@ from ultralytics import YOLO
 import numpy as np
 import time
 from collections import defaultdict
-import pygame
 
-# Inicializar pygame para reproducir el sonido
-pygame.mixer.init()
-
-# Cargar sonido de "envido"
-pygame.mixer.music.load('envido.mp3')
 
 
 def get_color_for_class(class_name):
@@ -103,7 +97,7 @@ class DetectCards:
                 detected_cards[card].append(current_time)
 
             for card in list(detected_cards.keys()):
-                detected_times = [t for t in detected_cards[card] if current_time - t <= 3]
+                detected_times = [t for t in detected_cards[card] if current_time - t <= 5]
                 if len(detected_times) >= 1 and card not in confirmed_cards:
                     confirmed_cards.append(card)
 
@@ -114,7 +108,8 @@ class DetectCards:
         cap.release()
         cv2.destroyAllWindows()
 
-        print(confirmed_cards)
+        print(set(confirmed_cards))
+
         return confirmed_cards
 
 
@@ -181,7 +176,6 @@ class DetectCards:
         # Liberar el recurso de captura y cerrar ventanas
         cap.release()
         cv2.destroyAllWindows()
-        print(detected_cards_for_3_seconds)
+
         return detected_cards_for_3_seconds
 
-DetectCards.detect_and_show_cards_real_time()

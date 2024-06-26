@@ -1,4 +1,12 @@
 from envido.sumar_tantos import sumar_envido
+import pygame
+
+# Inicializar pygame para reproducir el sonido
+pygame.mixer.init()
+
+# Cargar sonido de "envido"
+pygame.mixer.music.load('envido.mp3')
+
 
 COPA=['1C','2C','3C','4C','5C','6C','7C','8C','9C','10C','11C','12C']
 ORO=['1O','2O','3O','4O','5O','6O','7O','8O','9O','10O','11O','12O']
@@ -26,10 +34,15 @@ def cantar_envido(cartas: list[str]) -> str:
             basto.append(carta)
 
     for palo,nombre in [(copa,"Copa"),(oro,"Oro"),(basto,"Basto"),(espada,"Espada")]:
-        if len(palo) == 2:
+
+        if len(palo) == 2:            
             tantos=sumar_envido(palo)
+            pygame.mixer.music.play()
             return f"Canta envido con {nombre}, ya que tenemos {tantos} puntos"
         
         elif len(palo) == 3:
             tantos=sumar_envido(palo)
+            pygame.mixer.music.play()
             return f"Canta flor con {nombre}, ya que tenemos {tantos} puntos"
+
+    return "You dont have Envido!"
