@@ -1,5 +1,0 @@
-labelme==5.4.1
-opencv-python==4.5.4.60
-labelme2yolo==0.1.7
-augly[image]==1.0.0
-python-magic-bin==0.4.14
