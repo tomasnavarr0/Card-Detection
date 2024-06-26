@@ -21,3 +21,4 @@ def envido_from_strem():
     envido=cantar_envido(cards)
     print(envido,cards)
     return envido
+
