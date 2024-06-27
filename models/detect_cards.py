@@ -27,12 +27,8 @@ class DetectCards:
     model = YOLO(model_path)
 
     @staticmethod
-    def detect_and_show_cards_in_image(
-            image_path: str, model = model, class_names: dict[int,str] = model.names, confidence_threshold: float = 0.35
-            ) -> list[str]:
+    def detect_and_show_cards_in_image(image_path: str, model=model, class_names: dict[int, str] = model.names, confidence_threshold: float = 0.35) -> tuple:
         cards_found = []
-        # Cargar el modelo YOLOv8
-        #model = YOLO(model_path)
         
         # Cargar la imagen
         image = cv2.imread(image_path)
@@ -54,14 +50,7 @@ class DetectCards:
                 cv2.rectangle(image_rgb, (x1, y1), (x2, y2), color, 2)
                 cv2.putText(image_rgb, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
         
-        # Mostrar la imagen con los bounding boxes
-        plt.figure(figsize=(12, 8))
-        plt.imshow(image_rgb)
-        plt.axis('off')
-        plt.show()
-
-        return cards_found
-
+        return image_rgb, cards_found
 
     @staticmethod
     def detect_and_show_cards_in_video(video_path: str, model = model, class_names: dict[int, str] = model.names, confidence_threshold: float = 0.4) -> list[str]:
