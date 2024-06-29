@@ -27,7 +27,9 @@ class DetectCards:
     model = YOLO(model_path)
 
     @staticmethod
-    def detect_and_show_cards_in_image(image_path: str, model=model, class_names: dict[int, str] = model.names, confidence_threshold: float = 0.35) -> tuple:
+    def detect_and_show_cards_in_image(
+        image_path: str, model=model, class_names: dict[int, str] = model.names, confidence_threshold: float = 0.35
+        ) -> tuple:
         cards_found = []
         
         # Cargar la imagen
